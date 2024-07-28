@@ -1,2 +1,6 @@
 *.swp
 test.py
+*.adif
+*.swm
+*.swn
+*.swo

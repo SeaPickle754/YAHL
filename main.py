@@ -42,12 +42,14 @@ def  init_program():
 def begin():
     init_curses()
     #init_program()
-    show_tutorial()
-    query_for_presets()
-    mainloop()
+    try:
+        show_tutorial()
+        query_for_presets()
+        mainloop()
+    except:
+        end_curses()
     end_curses()
-
-
+    
 def show_tutorial():
     stdscr.clear()
     stdscr.addstr(0,0, "TUTORIAL: KK7OYV's YAHL")
@@ -136,5 +138,8 @@ def mainloop():
     adi.add_qso(call = qso_data["QSO callsign"], datetime_on = qso_data["time"], band = convert_freq_to_band(qso_data["Frequency"]), mode = qso_data["Mode"])
     stdscr.addstr((curses.LINES - 1), 0, "Contacts: 1", curses.color_pair(1))
     stdscr.refresh()
-    stdscr.getkey()
+    key = stdscr.getkey()
+    if key == "q":
+        return
+    mainloop()
 begin()
