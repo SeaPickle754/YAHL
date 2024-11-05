@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<title> TESTING </title>
+<style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #utcClock {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        #utcDate {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+</style>
+<body>
+	<div id="clock">FAILED TO LOAD JAVASCRIPT!!</div>
+	<form id="radioLogForm">
+    <!-- Date -->
+	    <label for="logDate">Date:</label>
+	    <input type="date" id="logDate" required><br><br>
+	
+	    <!-- Time -->
+	    <label for="logTime">Time (UTC):</label>
+	    <input type="time" id="logTime" required><br><br>
+	
+	    <!-- Frequency -->
+	    <label for="freq">Frequency (MHz):</label>
+	    <input type="number" id="freq" step="0.001" required><br><br>
+	
+	    <!-- Mode (AM, FM, SSB, CW, etc.) -->
+		<label for="mode">Mode:</label>
+        <select id="mode" required>
+            <option value="AM">AM</option>
+            <option value="FM">FM</option>
+            <option value="SSB">SSB</option>
+            <option value="CW">CW</option>
+            <option value="RTTY">RTTY</option>
+            <option value="PSK">PSK</option>
+            <option value="FT8">FT8</option>
+            <option value="JT65">JT65</option>
+			<option value="FT4">FT4</option>
+            <option value="Other">Other</option>
+        </select><br><br>
+	
+	    <!-- Your Signal Report -->
+	    <label for="rsts">Your Signal Report (RS/T):</label>
+	    <input type="text" id="rsts" required><br><br>
+	
+	    <!-- Their Signal Report -->
+	    <label for="rstr">Their Signal Report (RS/T):</label>
+	    <input type="text" id="rstr" required><br><br>
+	
+	    <!-- Callsign -->
+	    <label for="callsign">Callsign:</label>
+	    <input type="text" id="callsign" required><br><br>
+	    <!-- Log Button -->
+	    <button type="button" onclick="logContact()">Log Contact</button>
+	</form>
+
+	<p id="output"></p>
+	<script src="main.js"></script>
+	<script>
+		updateClock()
+	</script>
+</body>
+</html>
