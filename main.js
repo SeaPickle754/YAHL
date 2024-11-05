@@ -5,18 +5,24 @@ var rstRecv = null
 var mode = null
 var date = null
 var time = null
-
+var comments = null
 function logContact(){
     callsign = document.getElementById("callsign").value
     frequency = document.getElementById("freq").value
     rstSent = document.getElementById("rsts").value
     rstRecv = document.getElementById("rstr").value
     mode = document.getElementById("mode").value
+    comments = document.getElementById("cmnts").value
+
     mode = mode.toUpperCase()
     var p = document.getElementById("output");
     p.innerText = "Callsign:" + callsign + " freq:"+frequency+" rsts: " + rstSent + " rstr:" + rstRecv + " mode "+mode;
+    pushDataToServer();
 };
 
+function pushDataToServer(){
+    
+}
 // chat gpt
 function updateClock() {
             // Get current time and date in UTC

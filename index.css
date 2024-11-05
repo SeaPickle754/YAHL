@@ -1,0 +1,19 @@
+table {
+    border-collapse: collapse;
+   }
+   
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+#utcClock {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+#utcDate {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
