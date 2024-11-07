@@ -6,6 +6,8 @@ var mode = null
 var date = null
 var time = null
 var comments = null
+var contactTbl = document.getElementById("contactTbl")
+var tbodyRef = document.getElementById('contactTbl').getElementsByTagName('tbody')[0];
 function logContact(){
     callsign = document.getElementById("callsign").value
     frequency = document.getElementById("freq").value
@@ -13,13 +15,25 @@ function logContact(){
     rstRecv = document.getElementById("rstr").value
     mode = document.getElementById("mode").value
     comments = document.getElementById("cmnts").value
-
+    time = document.getElementById("logTime").value
+    date = document.getElementById("logDate").value
     mode = mode.toUpperCase()
     var p = document.getElementById("output");
     p.innerText = "Callsign:" + callsign + " freq:"+frequency+" rsts: " + rstSent + " rstr:" + rstRecv + " mode "+mode;
+    updateTable();
     pushDataToServer();
 };
-
+function updateTable(){
+    var newRow = tbodyRef.insertRow();
+    newRow.innerHTML = "<tr>\
+			<td>"+callsign+"</td>\
+			<td>"+ mode +"</td>\
+			<td>"+frequency+"</td>\
+			<td>"+ time +"</td>\
+			<td>"+ date +"</td>\
+			<td>"+ comments +"</td>\
+		</tr>"
+}
 function pushDataToServer(){
     
 }
