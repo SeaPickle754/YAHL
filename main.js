@@ -1,11 +1,27 @@
-var callsign = null
-var frequency = null
-var rstSent = null
-var rstRecv = null
-var mode = null
-var date = null
-var time = null
-var comments = null
+var callsign = null;
+var frequency = null;
+var rstSent = null;
+var rstRecv = null;
+var mode = null;
+var date = null;
+var time = null;
+var comments = null;
+var exchange = null;
+// just to reset everything back to null, after contact has been 
+// successfully pushed to server.
+function init_variables(){
+    callsign = null;
+    frequency = null;
+    rstSent = null;
+    rstRecv = null;
+    mode = null;
+    date = null;
+    time = null;
+    comments = null;
+    exchange = null;
+}
+// declare a socket for the server/frontend interface
+
 var contactTbl = document.getElementById("contactTbl")
 var tbodyRef = document.getElementById('contactTbl').getElementsByTagName('tbody')[0];
 function logContact(){
@@ -34,8 +50,50 @@ function updateTable(){
 			<td>"+ comments +"</td>\
 		</tr>"
 }
+
+function packData(){
+    // this fuction will pack the data into one long string.
+    var dataString = "";
+    // server will split at | (straight line) character.
+    // IMPORTANT:
+    // format is call, freq, sent, recv, mode, date, time, exchange
+    // Here we just append everything to the packet string
+    dataString += callsign + "|";
+    dataString += frequency + "|";
+    dataString += rstSent + "|";
+    dataString += rstRecv + "|";
+    dataString += mode + "|";
+    dataString += date + "|";
+    dataString += time + "|";
+    dataString += exchange + "|";
+    // send it to console in case we care
+    console.log(dataString)
+    return dataString;
+
+}
 function pushDataToServer(){
-    
+    var isSocketReady = false;
+    const socket = new WebSocket("ws://localhost:12345/")
+    var dataString = "";
+    dataString = packData();
+    // book keeping: print rcved msg to console
+    // and also send status to console
+    socket.onopen = () => {
+        console.log('WebSocket connected');
+        isSocketReady = true;
+    };
+    // after we know websocket has been opened
+    socket.onmessage = (event) => {
+        const receivedMessage = event.data;
+        console.log(receivedMessage);
+        // send packet
+        socket.send(dataString);
+        
+    };
+    socket.onclose = () => {
+        console.log('WebSocket disconnected');
+    }
+    init_variables();
 }
 // chat gpt
 function updateClock() {
